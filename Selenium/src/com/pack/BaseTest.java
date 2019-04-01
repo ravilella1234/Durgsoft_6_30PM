@@ -3,6 +3,7 @@ package com.pack;
 import java.io.FileInputStream;
 import java.util.Properties;
 
+import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,18 +22,20 @@ public class BaseTest
 	public static Properties p;
 	public static Properties or;
 	public static FileInputStream fis;
+	public static String projectpath="./";
 	
 	
 	public static void init() throws Exception
 	{
 		p=new Properties();
-		fis=new FileInputStream(System.getProperty("user.dir")+"//config.properties");
+		fis=new FileInputStream(projectpath+"//config.properties");
 		p.load(fis);
 		
 		or=new Properties();
-		fis=new FileInputStream(System.getProperty("user.dir")+"//OR.properties");
+		fis=new FileInputStream(projectpath+"//OR.properties");
 		or.load(fis);
 		
+		PropertyConfigurator.configure(projectpath+"log4j.properties");
 	}
 	
 	
