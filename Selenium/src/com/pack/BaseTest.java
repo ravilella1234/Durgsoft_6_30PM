@@ -16,6 +16,9 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerDriverService;
 import org.openqa.selenium.support.ui.Select;
 
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+
 public class BaseTest 
 {
 	public static WebDriver driver;
@@ -23,6 +26,11 @@ public class BaseTest
 	public static Properties or;
 	public static FileInputStream fis;
 	public static String projectpath="./";
+	
+	
+	//Extent Report Initialization
+	public static ExtentReports rep = ExtentManager.getInstance();
+	public static ExtentTest test;
 	
 	
 	public static void init() throws Exception
@@ -36,8 +44,10 @@ public class BaseTest
 		or.load(fis);
 		
 		PropertyConfigurator.configure(projectpath+"log4j.properties");
+		
 	}
 	
+		
 	
 	public static void launch(String browser)
 	{

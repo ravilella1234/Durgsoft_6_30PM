@@ -15,5 +15,6 @@
 	<classpathentry kind="lib" path="D:/Softwares/Selenium_Jars/selenium-java-3.11.0/libs/okio-1.13.0.jar"/>
 	<classpathentry kind="lib" path="D:/Browser_Drivers/log4j-1.2.17.jar"/>
 	<classpathentry kind="lib" path="D:/Browser_Drivers/extentreports-2.41.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/selenium jars/freemarker-2.3.23.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
