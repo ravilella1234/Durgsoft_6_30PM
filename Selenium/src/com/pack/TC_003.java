@@ -10,7 +10,7 @@ public class TC_003 extends BaseTest
 		
 	public static void main(String[] args) throws Exception 
 	{
-		test=rep.startTest("TC_003");
+		test=e.startTest("TC_003");
 		
 		init();
 		log.info("Loded... Config, OR, Log4j properties Files");
@@ -37,8 +37,8 @@ public class TC_003 extends BaseTest
 		log.info("Clicked on Amazon Search Button By using Locator :- " + or.getProperty("amazonsearchbutton_xpath"));
 		test.log(LogStatus.INFO, "Clicked on Amazon Search Button By using Locator :- " + or.getProperty("amazonsearchbutton_xpath"));
 		
-		rep.endTest(test);
-		rep.flush();
+		e.endTest(test);
+		e.flush();
 	}
 
 }

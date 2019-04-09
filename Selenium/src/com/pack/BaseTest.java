@@ -29,7 +29,7 @@ public class BaseTest
 	
 	
 	//Extent Report Initialization
-	public static ExtentReports rep = ExtentManager.getInstance();
+	public static ExtentReports e = ExtentManager.getInstance();
 	public static ExtentTest test;
 	
 	
