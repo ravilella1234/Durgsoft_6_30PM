@@ -1,10 +1,16 @@
 package com.pack;
 
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Date;
+import java.util.List;
 import java.util.Properties;
 
 import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -14,10 +20,14 @@ import org.openqa.selenium.edge.EdgeDriverService;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerDriverService;
+import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 
 public class BaseTest 
 {
@@ -26,7 +36,8 @@ public class BaseTest
 	public static Properties or;
 	public static FileInputStream fis;
 	public static String projectpath="./";
-	
+	public static SoftAssert s;
+	public static String screenshotFileName=null;
 	
 	//Extent Report Initialization
 	public static ExtentReports e = ExtentManager.getInstance();
@@ -108,11 +119,105 @@ public class BaseTest
 		return element;
 		
 	}
+	
+	
+	
+	public static List<WebElement> getElements(String locatorKey) 
+	{
+		List<WebElement> elementList=null;
+		
+			try 
+			{
+				if(locatorKey.endsWith("_id")) {
+					elementList=driver.findElements(By.id(or.getProperty(locatorKey)));
+				}else if(locatorKey.endsWith("_name")) {
+					elementList=driver.findElements(By.name(or.getProperty(locatorKey)));
+				}else if(locatorKey.endsWith("_classname")) {
+					elementList=driver.findElements(By.className(or.getProperty(locatorKey)));
+				}else if(locatorKey.endsWith("_linktext")) {
+					elementList=driver.findElements(By.linkText(or.getProperty(locatorKey)));
+				}else if(locatorKey.endsWith("_xpath")) {
+					elementList=driver.findElements(By.xpath(or.getProperty(locatorKey)));
+				}else if(locatorKey.endsWith("_css")) {
+					elementList=driver.findElements(By.cssSelector(or.getProperty(locatorKey)));
+				}
+				else
+				{
+					reportFailure("Locator not Correct -" + locatorKey);
+					Assert.fail("Locator not Correct -" + locatorKey);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			}
+			return elementList;	
+	}
+	
 
 
 	public static void click(String locatorKey) 
 	{
 		getElement(locatorKey).click();
 	}
+	
+	
+	/********************************* Validations ****************************/
+	public static boolean verifyText(String locatorKey, String expectedValue)
+	{
+			String actualValue = getElement(locatorKey).getText().trim();
+			System.out.println(actualValue);
+			if(actualValue.equals(expectedValue))
+				return true;
+			else 
+				return false;
+	}
+	
+	
+	public static boolean isElementPresent(String locatorKey)
+	{
+		List<WebElement> elementList=null;
+		
+		elementList=getElements(locatorKey);
+		if(elementList.size()==0)
+			return false;
+		else
+			return true;
+	}
 
+	
+/********************************* Reporting ****************************/
+	
+	public static void reportPass(String msg)
+	{
+		test.log(LogStatus.PASS, msg);
+		takeScreenShot();
+	}
+	
+	
+	public static void reportFailure(String msg)
+	{
+		test.log(LogStatus.FAIL, msg);
+		takeScreenShot();
+		Assert.fail(msg);
+	}
+	
+	
+	
+	public static void takeScreenShot() 
+	{
+		Date dt=new Date();
+		screenshotFileName = dt.toString().replace(":", "_").replace(" ", "_")+".png";
+		File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+		try {
+			FileHandler.copy(scrFile, new File(projectpath+"//FailureScreenShots//"+screenshotFileName));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		//put screen shot file in extent reports
+		//test.log(LogStatus.INFO, "Screenshot --> "+ test.addScreenCapture(System.getProperty("user.dir"))+"//FailureScreenShots//"+screenshotFileName);
+		test.log(LogStatus.INFO, "Screenshot --> "+ test.addScreenCapture(projectpath+"//FailureScreenShots//"+screenshotFileName));
+	}
+	
+	
 }

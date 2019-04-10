@@ -34,7 +34,7 @@ public class TC_005 extends BaseTest
 		
 		//Assert.assertEquals(actualLink, expectedLink);
 		
-		SoftAssert s=new SoftAssert();
+		s=new SoftAssert();
 		s.assertEquals(actualLink, expectedLink);
 		
 		int a=40, b=30;
