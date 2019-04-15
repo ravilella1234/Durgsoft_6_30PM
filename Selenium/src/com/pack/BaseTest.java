@@ -101,20 +101,34 @@ public class BaseTest
 	public static WebElement getElement(String locatorKey) 
 	{
 		WebElement element=null;
-		if(locatorKey.endsWith("_id")){
-			element=driver.findElement(By.id(or.getProperty(locatorKey)));
-		}else if(locatorKey.endsWith("_name")) {
-			element=driver.findElement(By.name(or.getProperty(locatorKey)));
-		}else if(locatorKey.endsWith("_classname")) {
-			element=driver.findElement(By.className(or.getProperty(locatorKey)));
-		}else if(locatorKey.endsWith("_xpath")) {
-			element=driver.findElement(By.xpath(or.getProperty(locatorKey)));
-		}else if(locatorKey.endsWith("_css")) {
-			element=driver.findElement(By.cssSelector(or.getProperty(locatorKey)));
-		}else if(locatorKey.endsWith("_linktext")) {
-			element=driver.findElement(By.linkText(or.getProperty(locatorKey)));
-		}else if(locatorKey.endsWith("_partiallink")) {
-			element=driver.findElement(By.partialLinkText(or.getProperty(locatorKey)));
+		
+		try {
+			if(locatorKey.endsWith("_id")){
+				element=driver.findElement(By.id(or.getProperty(locatorKey)));
+			}else if(locatorKey.endsWith("_name")) {
+				element=driver.findElement(By.name(or.getProperty(locatorKey)));
+			}else if(locatorKey.endsWith("_classname")) {
+				element=driver.findElement(By.className(or.getProperty(locatorKey)));
+			}else if(locatorKey.endsWith("_xpath")) {
+				element=driver.findElement(By.xpath(or.getProperty(locatorKey)));
+			}else if(locatorKey.endsWith("_css")) {
+				element=driver.findElement(By.cssSelector(or.getProperty(locatorKey)));
+			}else if(locatorKey.endsWith("_linktext")) {
+				element=driver.findElement(By.linkText(or.getProperty(locatorKey)));
+			}else if(locatorKey.endsWith("_partiallink")) {
+				element=driver.findElement(By.partialLinkText(or.getProperty(locatorKey)));
+			}
+			else
+			{
+				reportFailure("Locator not correct ..."+ locatorKey);
+				Assert.fail("Locator not correct ..."+ locatorKey);
+			}
+		} 
+		catch (Exception e) 
+		{
+			reportFailure(e.getMessage());
+			e.printStackTrace();
+			Assert.fail(e.getMessage());
 		}
 		return element;
 		
@@ -215,7 +229,6 @@ public class BaseTest
 		}
 		
 		//put screen shot file in extent reports
-		//test.log(LogStatus.INFO, "Screenshot --> "+ test.addScreenCapture(System.getProperty("user.dir"))+"//FailureScreenShots//"+screenshotFileName);
 		test.log(LogStatus.INFO, "Screenshot --> "+ test.addScreenCapture(projectpath+"//FailureScreenShots//"+screenshotFileName));
 	}
 	

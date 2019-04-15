@@ -26,6 +26,11 @@ public class TC_006 extends BaseTest
 		log.info("Navigated to url :- " + p.getProperty("amazonurl"));
 		test.log(LogStatus.INFO, "Navigated to url :- " + p.getProperty("amazonurl"));
 		
+		
+		type("amazonsearchtext_id","harry Potter");
+		log.info("Entered the Text Harry Potter By using the Locator :- " + or.getProperty("amazonsearchtext_id"));
+		test.log(LogStatus.INFO, "Entered the Text Harry Potter By using the Locator :- " + or.getProperty("amazonsearchtext_id"));
+		
 		if(!verifyText("customerservice_linktext", "Customer Service"))
 			reportFailure("LinkText are not Equal");
 		else
