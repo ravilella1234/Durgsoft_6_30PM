@@ -62,16 +62,16 @@ public class BaseTest
 	
 	public static void launch(String browser)
 	{
-		if(p.getProperty(browser).equals("chrome")){
+		if(browser.equals("chrome")){
 			System.setProperty(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY, System.getProperty("user.dir")+"//drivers//chromedriver.exe");
 			driver=new ChromeDriver();
-		}else if (p.getProperty(browser).equals("firefox")) {
+		}else if (browser.equals("firefox")) {
 			System.setProperty("webdriver.gecko.driver",System.getProperty("user.dir")+"//drivers//geckodriver.exe" );
 			driver=new FirefoxDriver();
-		}else if (p.getProperty(browser).equals("ie")) {
+		}else if (browser.equals("ie")) {
 			System.setProperty(InternetExplorerDriverService.IE_DRIVER_EXE_PROPERTY, System.getProperty("user.dir")+"//drivers//IEDriverServer.exe" );
 			driver=new InternetExplorerDriver();
-		}else if (p.getProperty(browser).equals("edge")) {
+		}else if (browser.equals("edge")) {
 			System.setProperty(EdgeDriverService.EDGE_DRIVER_EXE_PROPERTY, System.getProperty("user.dir")+"//drivers//MicrosoftWebDriver.exe" );
 			driver=new EdgeDriver();
 		}	
@@ -232,5 +232,11 @@ public class BaseTest
 		test.log(LogStatus.INFO, "Screenshot --> "+ test.addScreenCapture(projectpath+"//FailureScreenShots//"+screenshotFileName));
 	}
 	
+	
+	
+	public static void closeBrowser() 
+	{
+		driver.quit();
+	}
 	
 }
