@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="smokeSuite" duration-ms="23950" started-at="2019-04-18T13:58:58Z" finished-at="2019-04-18T13:59:21Z">
+    <groups>
+    </groups>
+    <test name="ChromeTest" duration-ms="23950" started-at="2019-04-18T13:58:58Z" finished-at="2019-04-18T13:59:21Z">
+      <class name="com.project.EMobiles.TC_103">
+        <test-method status="PASS" signature="startProcess(java.lang.String)[pri:0, instance:com.project.EMobiles.TC_103@27f723]" name="startProcess" is-config="true" duration-ms="7531" started-at="2019-04-18T13:58:58Z" finished-at="2019-04-18T13:59:05Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- startProcess -->
+        <test-method status="PASS" signature="amazon()[pri:0, instance:com.project.EMobiles.TC_103@27f723]" name="amazon" duration-ms="14171" started-at="2019-04-18T13:59:05Z" finished-at="2019-04-18T13:59:19Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- amazon -->
+        <test-method status="PASS" signature="endProcess()[pri:0, instance:com.project.EMobiles.TC_103@27f723]" name="endProcess" is-config="true" duration-ms="2195" started-at="2019-04-18T13:59:19Z" finished-at="2019-04-18T13:59:21Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- endProcess -->
+      </class> <!-- com.project.EMobiles.TC_103 -->
+    </test> <!-- ChromeTest -->
+  </suite> <!-- smokeSuite -->
+</testng-results>
